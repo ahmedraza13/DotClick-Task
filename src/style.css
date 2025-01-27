@@ -1,0 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.left-side {
+  background-image: url('./assets//signup-image.jpg'); /* replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%; /* Make sure it takes full height */
+  padding: 16px;
+}
