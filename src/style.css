@@ -13,3 +13,139 @@
   height: 100%; /* Make sure it takes full height */
   padding: 16px;
 }
+
+/* Container for the whole page */
+.signUpContainer {
+  height: 100vh;
+  display: flex;
+}
+
+/* Left Side with Background Image */
+.leftSide {
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 100%;
+}
+
+/* Right Side with Input Fields */
+.rightSide {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Box for the right side content */
+.formBox {
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+/* Form header */
+.formHeader {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Error message */
+.errorText {
+  margin-bottom: 10px;
+  color: red;
+  font-size: 0.875rem;
+}
+
+/* Custom button styling */
+.signUpButton {
+  margin-top: 16px;
+  border-radius: 12px;
+}
+
+/* Login link styling */
+.loginText {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.loginLink {
+  text-transform: none;
+}
+
+/* Background image styling for left side */
+.leftSideBox {
+  margin-left: 30px;
+}
+
+
+
+/* login.css */
+
+/* Main container for the login page */
+.loginContainer {
+  height: 100vh;
+}
+
+/* Left side background image */
+.leftSide {
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  color: white;
+}
+
+.leftSideBox {
+  margin-left: 15%;
+  color: white;
+}
+
+/* Right side for form and inputs */
+.rightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100%;
+}
+
+.formBox {
+  width: 80%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 8px;
+  
+}
+
+.formHeader {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.errorText {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.loginButton {
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+.signupText {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signupLink {
+  text-transform: none;
+  text-decoration: underline;
+}
+
+
+
+

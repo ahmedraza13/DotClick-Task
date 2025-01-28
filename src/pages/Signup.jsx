@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, Box, Grid, useTheme } from "@mui/material";
-import signupImage from "../assets/signup-image.jpg"; // Ensure path is correct
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Grid,
+  useTheme,
+} from "@mui/material";
+import signupImage from "../assets/signup-image.jpg";
+import { useNavigate } from "react-router-dom";
 
-// Simplified function to generate JWT (just for simulation)
 const generateJWT = (email) => {
-  const payload = { email };  // Use email as payload
+  const payload = { email };
   const header = { alg: "HS256", typ: "JWT" };
-  
-  // Base64 encode the header and payload (mocking JWT)
+
   const base64Header = btoa(JSON.stringify(header));
   const base64Payload = btoa(JSON.stringify(payload));
 
-  // Simulate the signature by just appending a mock string (not real signing)
   const signature = "signature-placeholder";
 
   return `${base64Header}.${base64Payload}.${signature}`;
@@ -19,8 +24,10 @@ const generateJWT = (email) => {
 
 const SignUpPage = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   // State to handle form inputs
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,28 +41,23 @@ const SignUpPage = () => {
       return;
     }
 
-    // Generate the JWT token (for simulation)
     const token = generateJWT(email);
 
-    // Store user and token in localStorage (simulate user registration)
-    localStorage.setItem("user", JSON.stringify({ email }));
+    localStorage.setItem("user", JSON.stringify({ name,email, password }));
     localStorage.setItem("jwt", token);
 
     console.log("User signed up successfully and JWT token is stored!");
-
-    // Clear form fields
+    setName("")
     setEmail("");
     setPassword("");
     setConfirmPassword("");
     setError("");
 
-    // Redirect user to the login page (for simplicity, just print in the console)
     window.location.href = "/login";
   };
 
   return (
     <Grid container spacing={0} style={{ height: "100vh" }}>
-      {/* Left Side with Background Image */}
       <Grid
         item
         xs={12}
@@ -77,7 +79,11 @@ const SignUpPage = () => {
           <Typography paragraph>
             The most popular peer-to-peer lending at sea
           </Typography>
-          <Button variant="contained" color="primary" sx={{ borderRadius: "20px" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ borderRadius: "20px" }}
+          >
             Read More
           </Button>
         </Box>
@@ -97,16 +103,30 @@ const SignUpPage = () => {
         }}
       >
         <Box sx={{ width: "80%", maxWidth: 400, padding: theme.spacing(4) }}>
-          <Typography variant="h6">Create Account</Typography>
-          <Typography paragraph>Sign up to get started</Typography>
+          <Typography variant="h6">Hello Again!</Typography>
+          <Typography paragraph>Welcome Back </Typography>
 
           {error && (
-            <Typography variant="body2" color="error" sx={{ marginBottom: theme.spacing(2) }}>
+            <Typography
+              variant="body2"
+              color="error"
+              sx={{ marginBottom: theme.spacing(2) }}
+            >
               {error}
             </Typography>
           )}
 
           <form onSubmit={handleSignUp}>
+          <TextField
+              label="Name"
+              type="name"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              sx={{ borderRadius: "12px" }}
+            />
             <TextField
               label="Email"
               type="email"
@@ -157,8 +177,7 @@ const SignUpPage = () => {
                 color="primary"
                 sx={{ textTransform: "none" }}
                 onClick={() => {
-                  // Navigate to Login Page (replace with actual route)
-                  window.location.href = "/login";
+                  navigate("/login");
                 }}
               >
                 Login

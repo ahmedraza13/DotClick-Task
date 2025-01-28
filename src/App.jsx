@@ -1,8 +1,8 @@
-import Home from './pages/Home.jsx'
+import Navigation from './navigation/Navigation'
 
 function App() {
   return (
-   <Home/>
+   <Navigation/>
   )
 }
 
