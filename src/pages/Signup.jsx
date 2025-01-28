@@ -63,7 +63,7 @@ const SignUpPage = () => {
     setConfirmPassword("");
     setError("");
 
-    window.location.href = "/login";
+   navigate("/login")
   };
 
   return (
