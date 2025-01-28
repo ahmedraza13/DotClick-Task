@@ -6,6 +6,7 @@ import {
   Box,
   Grid,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import signupImage from "../assets/signup-image.jpg";
 import { useNavigate } from "react-router-dom";
@@ -26,8 +27,11 @@ const SignUpPage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
+  // Media query to detect small screens
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   // State to handle form inputs
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -36,6 +40,11 @@ const SignUpPage = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
+    if (!name || !email || !password || !confirmPassword) {
+      setError("All fields are required.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -43,11 +52,12 @@ const SignUpPage = () => {
 
     const token = generateJWT(email);
 
-    localStorage.setItem("user", JSON.stringify({ name,email, password }));
+    localStorage.setItem("user", JSON.stringify({ name, email, password }));
     localStorage.setItem("jwt", token);
 
     console.log("User signed up successfully and JWT token is stored!");
-    setName("")
+    alert("Signup Successfull")
+    setName("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
@@ -58,34 +68,38 @@ const SignUpPage = () => {
 
   return (
     <Grid container spacing={0} style={{ height: "100vh" }}>
+      {/* Left Side with Background Image */}
       <Grid
         item
         xs={12}
         md={7}
         style={{
-          display: "flex",
+          display: isSmallScreen ? "none" : "flex", // Hide background on small screens
           alignItems: "center",
-          backgroundImage: `url(${signupImage})`,
+         
+          backgroundImage: !isSmallScreen ? `url(${signupImage})` : 'none',
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "100%",
           color: "white",
         }}
       >
-        <Box sx={{ marginLeft: theme.spacing(15) }}>
+        <Box sx={{ marginLeft: theme.spacing(12) }}>
           <Typography variant="h4" component="h3" gutterBottom>
             GoFinance
           </Typography>
           <Typography paragraph>
             The most popular peer-to-peer lending at sea
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ borderRadius: "20px" }}
-          >
-            Read More
-          </Button>
+          {!isSmallScreen && (
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ borderRadius: "20px" }}
+            >
+              Read More
+            </Button>
+          )}
         </Box>
       </Grid>
 
@@ -99,25 +113,37 @@ const SignUpPage = () => {
         justifyContent="center"
         style={{
           padding: theme.spacing(2),
-          height: "100%",
+          height: "100%", // Full height to maintain consistency
+          display: "flex", // Use flexbox to center the form vertically
+          flexDirection: "column",
+          justifyContent: "center", // Center the form vertically
         }}
       >
-        <Box sx={{ width: "80%", maxWidth: 400, padding: theme.spacing(4) }}>
-          <Typography variant="h6">Hello Again!</Typography>
-          <Typography paragraph>Welcome Back </Typography>
+        <Box
+          sx={{
+            width: "80%",
+            maxWidth: 400,
+            padding: theme.spacing(4),
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center", // Ensure the form is centered vertically
+          }}
+        >
+          <Typography variant="h6" align="center">Hello Again!</Typography>
+          <Typography paragraph align="center">Welcome Back</Typography>
 
           {error && (
             <Typography
               variant="body2"
               color="error"
-              sx={{ marginBottom: theme.spacing(2) }}
+              sx={{ marginBottom: theme.spacing(2), textAlign: "center" }}
             >
               {error}
             </Typography>
           )}
 
           <form onSubmit={handleSignUp}>
-          <TextField
+            <TextField
               label="Name"
               type="name"
               variant="outlined"
@@ -176,9 +202,7 @@ const SignUpPage = () => {
                 variant="text"
                 color="primary"
                 sx={{ textTransform: "none" }}
-                onClick={() => {
-                  navigate("/login");
-                }}
+                onClick={() => navigate("/login")}
               >
                 Login
               </Button>

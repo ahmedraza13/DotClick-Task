@@ -128,13 +128,13 @@ export default function DashBoardTable() {
                 <TableCell align="right">
                   {editableInvoice?.invoiceId === invoice.invoiceId ? (
                     <TextField
-                      name="amountDue"
-                      value={updatedData.amountDue}
+                      name="Due"
+                      value={updatedData.Due}
                       onChange={handleInputChange}
                       fullWidth
                     />
                   ) : (
-                    invoice.amountDue
+                    invoice.Due
                   )}
                 </TableCell>
                 <TableCell align="right">
